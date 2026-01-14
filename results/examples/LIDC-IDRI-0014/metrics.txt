@@ -1,0 +1,10 @@
+Metrics are loaded from results/metrics/metrics_all.csv
+
+Eq 9-FP:
+  PSNR: 13.71
+  SSIM: 0.617
+
+DeepDRR-FP:
+  PSNR: 17.17
+  SSIM: 0.795
+

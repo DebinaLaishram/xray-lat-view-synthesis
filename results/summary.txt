@@ -1,0 +1,12 @@
+LAT View Synthesis Evaluation (0° to 90°)
+========================================
+
+Evaluated test cases: 54
+
+Eq.(9) vs GT:
+  Mean PSNR: 12.81
+  Mean SSIM: 0.601
+
+DeepDRR vs GT:
+  Mean PSNR: 14.43
+  Mean SSIM: 0.759
