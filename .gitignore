@@ -1,14 +1,36 @@
-# ---- EXCLUDE RAW MEDICAL DATA ----
+# ================================
+# EXCLUDE LARGE / RAW DATA
+# ================================
+data/*
+!data/projections/
+!data/projections/AP/
+!data/projections/AP/**
+!data/projections/LAT/
+!data/projections/LAT/**
+!data/vbp_png/
+!data/vbp_png/**
+
+# =========================================
+# EXCLUDE RAW / INTERMEDIATE ARRAYS
+# =========================================
+*.npy
+
+
+# ================================
+# EXCLUDE RAW MEDICAL VOLUMES
+# ================================
 *.dcm
 *.nii
 *.nii.gz
 
-# ---- PYTHON CACHE ----
+# ================================
+# PYTHON CACHE
+# ================================
 __pycache__/
 *.pyc
 
-# ---- LOGS ----
+# ================================
+# LOGS / INSTALLERS
+# ================================
 *.log
-
-# ---- INSTALLERS ----
 *.deb
