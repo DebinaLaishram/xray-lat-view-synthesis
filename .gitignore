@@ -1,23 +1,14 @@
-# Do not track data or outputs
-data/
-runs/
-results/
+# ---- EXCLUDE RAW MEDICAL DATA ----
+*.dcm
+*.nii
+*.nii.gz
 
-# Model checkpoints
-*.pt
-*.pth
-*.ckpt
-
-# Images
-*.png
-*.jpg
-*.jpeg
-
-# Python cache
+# ---- PYTHON CACHE ----
 __pycache__/
 *.pyc
 
-# Logs / temp
+# ---- LOGS ----
 *.log
 
+# ---- INSTALLERS ----
 *.deb
