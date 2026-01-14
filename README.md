@@ -87,26 +87,35 @@ Directories may contain many PNG images generated during preprocessing, inferenc
 ```text
 src/
 ├── preprocessing/
-│   ├── backprojection_eq1.py        # Implements Eq. (1)
-│   ├── forward_projection_eq9.py    # Implements Eq. (9)
+│   ├── convert_dicom_to_nifti.py         # Convert single DICOM series to NIfTI
+│   ├── convert_all_dicom_to_nifti.py     # Batch DICOM → NIfTI conversion
+│   ├── resample_standardize.py           # Resampling, HU clipping, normalization
+│   └── dataset_split.py                  # Train / val / test split
 │
-├── models/
-│   └── unet3d.py                    # 3D U-Net (Gz)
-├── evaluation/
-│   └── evaluation.py                # PSNR / SSIM computation
+├── pipeline/
+│   ├── run_deepdrr_batch.py              # Generate AP and GT LAT using DeepDRR
+│   ├── backprojection_eq1.py             # Implements Eq. (1)
+│   ├── forward_projection_eq9.py         # Implements Eq. (9)
+│   ├── forward_projection_deepdrr_pred.py# LAT projection from predicted CT (DeepDRR)
+│   ├── unet3d.py                         # 3D U-Net (Gz)
+│   ├── train_ct.py                       # CT refinement training
+│   ├── infer_ct.py                       # CT inference
+│   └── evaluation.py                    # PSNR / SSIM computation
+│
 ├── visualization/
-│   └── examples.py                  # Qualitative comparison figures
+│   └── examples.py                       # Qualitative comparison figures
+│
 data/
 ├── projections/
-│   ├── AP/                          # Input AP X-rays (.png)
-│   └── LAT/                      # Ground-truth LAT (.png)
+│   ├── AP/                               # Input AP X-rays (.png)
+│   └── LAT/                              # Ground-truth LAT (.png)
+│
 runs/
 ├── ct_refine/
-│   ├── checkpoints/                 # Best / last model checkpoints (.pt)
-│   ├── debug_slices/                # Training sanity-check images (.png)
-│   ├── lat_eq9_cone/                # Synthesized LAT via Eq. (9) (.png)
-│   ├── lat_deepdrr_predct/          # Synthesized LAT via DeepDRR (.png)
-│   └── test_predictions/            # Predicted CT volumes (.png)
+│   ├── debug_slices/                     # Training sanity-check visualizations (.png)
+│   ├── lat_eq9_cone/                     # Synthesized LAT via Eq. (9) (.png)
+│   └── lat_deepdrr_predct/               # Synthesized LAT via DeepDRR (.png)
+│
 results/
 ├── metrics/
 │   └── metrics_all.csv
@@ -125,7 +134,10 @@ results/
   - Peak Signal-to-Noise Ratio (**PSNR**)  
   - Structural Similarity Index (**SSIM**, computed in the log-attenuation domain)
 
-Orientation corrections are applied consistently where required to ensure detector alignment prior to metric computation.
+On the held-out test set, the proposed pipeline achieves:
+
+- Eq.(9) vs GT: PSNR ≈ 12–13, SSIM ≈ 0.60
+- DeepDRR vs GT (orientation-corrected): PSNR ≈ 14.4, SSIM ≈ 0.76
 
 ---
 
